@@ -1,6 +1,7 @@
 package com.practice.springpractice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,15 +14,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Toy {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String color;
-    private String type;
-    private String description;
-    private String imageURL;
-    private Double price;
-    private Integer quantity;
+    private Integer total;
+    private Integer quantityPurchased;
+
+    private Long purchasedToyId;
 }
