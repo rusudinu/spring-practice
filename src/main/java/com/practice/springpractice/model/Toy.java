@@ -1,6 +1,7 @@
 package com.practice.springpractice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,9 @@ public class Toy {
     private String imageURL;
     private Double price;
     private Integer quantity;
+
+    @OneToMany
+    @JsonManagedReference
+    @JsonIgnore
+    private List<Order> orders;
 }
