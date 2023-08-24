@@ -5,6 +5,7 @@ import com.practice.springpractice.model.Toy;
 import com.practice.springpractice.service.ToyService;
 import com.practice.springpractice.service.ToyServiceDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,28 @@ import java.util.List;
 public class ToyController {
     private final ToyService toyService;
     private final ToyServiceDTO toyServiceDTO;
+
+    @GetMapping("/toys")
+    public Page<Toy> getToysPaginated(@RequestParam(required = false, defaultValue = "0") Integer pageNo,
+                                      @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+        return toyService.getToysPaginated(pageNo, pageSize);
+    }
+
+    @GetMapping("/sorted-toys")
+    public Page<Toy> getToysPaginatedAndSorted(@RequestParam(required = false, defaultValue = "0") Integer pageNo,
+                                               @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+        return toyService.getToysPaginatedAndSorted(pageNo, pageSize);
+    }
+
+    @GetMapping("/low-stock-toys")
+    public List<Toy> getLowStockToys() {
+        return toyService.getLowStockToys();
+    }
+
+    @GetMapping("/low-stock-toys-native")
+    public List<Toy> getLowStockToysNative() {
+        return toyService.getLowStockToysNative();
+    }
 
     @GetMapping
     public List<Toy> getToys() {
