@@ -39,4 +39,9 @@ public class StudentService {
     public void incrementPoints(String studentName) {
         studentRepository.incrementStudentPoints(studentName);
     }
+
+    @Transactional
+    public void decrementPoints(String studentName) {
+        studentRepository.decrementStudentPoints(studentName);
+    }
 }

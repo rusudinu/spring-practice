@@ -25,4 +25,9 @@ public class StudentController {
     public void incrementStudentPoints(@RequestBody Student student) {
         studentService.incrementPoints(student.getName());
     }
+
+    @PostMapping("decrement")
+    public void decrementStudentPoints(@RequestBody Student student) {
+        studentService.decrementPoints(student.getName());
+    }
 }

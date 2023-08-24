@@ -10,4 +10,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Modifying
     @Query("UPDATE Student s SET s.points = s.points + 1 WHERE s.name = ?1")
     void incrementStudentPoints(String studentName);
+
+    @Modifying
+    @Query("UPDATE Student s SET s.points = s.points - 1 WHERE s.name = ?1")
+    void decrementStudentPoints(String studentName);
 }
