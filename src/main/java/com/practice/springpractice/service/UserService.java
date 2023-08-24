@@ -19,12 +19,15 @@ public class UserService {
 
     @Transactional
     public boolean logIn(User userToLog) {
+        log.warn("Processing user logged in");
         User userFromDb = userRepository.findByUsername(userToLog.getUsername());
         boolean boolLogIn = userFromDb
                 .getPassword().equals(userToLog.getPassword());
         if (boolLogIn) {
+            log.info("User successfully logged in");
             userRepository.incrementSuccessAttempts(userFromDb.getId());
         } else {
+            log.error("User unsuccessfully logged in");
             userRepository.incrementFailedAttempts(userFromDb.getId());
         }
         return boolLogIn;
