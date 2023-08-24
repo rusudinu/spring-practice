@@ -39,6 +39,16 @@ public class ToyController {
         return toyService.getLowStockToysNative();
     }
 
+    @PutMapping("/increment/{id}")
+    public void incrementQuantity(@PathVariable Long id) {
+        toyService.incrementQuantity(id);
+    }
+
+    @PutMapping("/decrement/{id}")
+    public void decrementQuantity(@PathVariable Long id) {
+        toyService.decrementQuantity(id);
+    }
+
     @GetMapping
     public List<Toy> getToys() {
         return toyService.getToys();

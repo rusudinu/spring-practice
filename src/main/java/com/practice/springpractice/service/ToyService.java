@@ -2,6 +2,7 @@ package com.practice.springpractice.service;
 
 import com.practice.springpractice.model.Toy;
 import com.practice.springpractice.repository.ToyRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,16 @@ public class ToyService {
         log.warn("getToys() called as a warning");
         log.error("getToys() called as am error");
         return toyRepository.findAll();
+    }
+
+    @Transactional
+    public void incrementQuantity(Long id) {
+        toyRepository.incrementQuantity(id);
+    }
+
+    @Transactional
+    public void decrementQuantity(Long id) {
+        toyRepository.decrementQuantity(id);
     }
 
     public Page<Toy> getToysPaginated(Integer pageNo, Integer pageSize) {
