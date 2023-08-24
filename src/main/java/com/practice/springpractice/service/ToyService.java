@@ -3,6 +3,7 @@ package com.practice.springpractice.service;
 import com.practice.springpractice.model.Toy;
 import com.practice.springpractice.repository.ToyRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -10,12 +11,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ToyService {
     private final ToyRepository toyRepository;
 
     public List<Toy> getToys() {
+        log.info("getToys() called");
+        log.warn("getToys() called as a warning");
+        log.error("getToys() called as am error");
         return toyRepository.findAll();
     }
 
