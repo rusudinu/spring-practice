@@ -10,22 +10,22 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserService{
+public class UserService {
     private final UserRepository userRepository;
 
     public User saveUser(User userToSave) {
-       return userRepository.save(userToSave);
+        return userRepository.save(userToSave);
     }
 
     @Transactional
     public boolean logIn(User userToLog) {
-        boolean boolLogIn = userRepository.findByUsername(userToLog.getUsername())
+        User userFromDb = userRepository.findByUsername(userToLog.getUsername());
+        boolean boolLogIn = userFromDb
                 .getPassword().equals(userToLog.getPassword());
         if (boolLogIn) {
-            userRepository.incrementSuccessAttempts(userToLog.getId());
-        }
-        else {
-            userRepository.incrementFailedAttempts(userToLog.getId());
+            userRepository.incrementSuccessAttempts(userFromDb.getId());
+        } else {
+            userRepository.incrementFailedAttempts(userFromDb.getId());
         }
         return boolLogIn;
     }
