@@ -19,9 +19,6 @@ public class BurgerOrderService {
     private final BurgerService burgerService;
 
 
-
-
-
     public List<BurgerOrder> getAllOrders() {
         log.info("Get all orders.");
         return burgerOrderRepository.findAll();
@@ -32,6 +29,6 @@ public class BurgerOrderService {
         log.info("Creating order for burger with id " + id);
         Burger burger = burgerService.getBurger(id);
 
-        return burgerOrderRepository.save(  new BurgerOrder( null , quantity, id , (double) burger.getPrice() * quantity ));
+        return burgerOrderRepository.save(new BurgerOrder(null, quantity, id, (double) burger.getPrice() * quantity));
     }
 }

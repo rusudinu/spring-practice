@@ -19,7 +19,6 @@ public class Burger {
     @GeneratedValue(  strategy =  GenerationType.IDENTITY)
     private Long id;
     private Integer price;
-
     private String description;
 
 }

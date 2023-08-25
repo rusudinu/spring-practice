@@ -5,6 +5,9 @@ import com.practice.springpractice.model.Burger;
 import com.practice.springpractice.repository.BurgerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +46,13 @@ public class BurgerService {
     public List<Burger> getAllBurgers() {
         log.info("Listing all burgers");
         return burgerRepository.findAll();
+    }
+
+    public Page<Burger> getAllBurgersPaginated(Integer pageNo, Integer pageSize) {
+        return burgerRepository.findAll(PageRequest.of(pageNo, pageSize));
+    }
+
+    public Page<Burger> getAllBurgersPaginatedAndSorted(Integer pageNo, Integer pageSize, String criteria) {
+        return burgerRepository.findAll(PageRequest.of(pageNo, pageSize, Sort.by(criteria)));
     }
 }
