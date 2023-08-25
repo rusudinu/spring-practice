@@ -6,6 +6,8 @@ import com.practice.springpractice.service.ToyService;
 import com.practice.springpractice.service.ToyServiceDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,23 +72,24 @@ public class ToyController {
     }
 
     @GetMapping("/{id}")
-    public Toy getToy(@PathVariable Long id) {
-        return toyService.getToy(id);
+    public ResponseEntity<Toy> getToy(@PathVariable Long id) {
+        return new ResponseEntity<>(toyService.getToy(id), HttpStatus.OK);
     }
 
     @GetMapping("/byName/{name}")
-    public Toy getToy(@PathVariable String name) {
-        return toyService.getToy(name);
+    public ResponseEntity<Toy> getToy(@PathVariable String name) {
+
+        return new ResponseEntity<>(toyService.getToy(name), HttpStatus.OK);
     }
 
     @PostMapping
-    public Toy createToy(@RequestBody Toy toy) {
-        return toyService.createToy(toy);
+    public ResponseEntity<Toy> createToy(@RequestBody Toy toy) {
+        return new ResponseEntity<>(toyService.createToy(toy), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public Toy updateToy(@RequestBody Toy toy) {
-        return toyService.updateToy(toy);
+    public ResponseEntity<Toy> updateToy(@RequestBody Toy toy) {
+        return new ResponseEntity<>(toyService.updateToy(toy), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
