@@ -26,7 +26,7 @@ public class CookiesDemoController {
                 .body("Cookie has been set");
     }
 
-    @GetMapping("")
+    @GetMapping
     public String readCookie(@CookieValue(name = "TestCookie", defaultValue = "default") String userId) {
         return userId;
     }
