@@ -5,6 +5,8 @@ import com.practice.springpractice.model.Burger;
 import com.practice.springpractice.model.BurgerOrder;
 import com.practice.springpractice.service.BurgerOrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,14 +20,14 @@ public class BurgerOrderController {
 
 
     @GetMapping
-    public List<BurgerOrder> getAllOrders()
+    public ResponseEntity< List<BurgerOrder> > getAllOrders()
     {
-        return burgerOrderService.getAllOrders();
+        return  new ResponseEntity<>( burgerOrderService.getAllOrders() , HttpStatus.OK ) ;
     }
 
     @PostMapping
-    public BurgerOrder addBurgerOrder( @RequestParam Long id , @RequestParam Integer quantity ) {
-        return burgerOrderService.addBurgerOrder( id, quantity);
+    public ResponseEntity<BurgerOrder> addBurgerOrder( @RequestParam Long id , @RequestParam Integer quantity ) {
+        return new ResponseEntity<>(burgerOrderService.addBurgerOrder( id, quantity) , HttpStatus.OK);
     }
 
 }
