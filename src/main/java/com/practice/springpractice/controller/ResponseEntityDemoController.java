@@ -1,9 +1,11 @@
 package com.practice.springpractice.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/v1/response-entity")
 public class ResponseEntityDemoController {
+    @GetMapping("/manual")
+    void manual(HttpServletResponse response) throws IOException {
+        response.setHeader("Custom-Header", "foo");
+        response.setStatus(200);
+        response.getWriter().println("Hello World!");
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getData(@PathVariable String id) {
