@@ -22,11 +22,22 @@ public class BurgerOrderController {
     @GetMapping
     public ResponseEntity< List<BurgerOrder> > getAllOrders()
     {
-        return  new ResponseEntity<>( burgerOrderService.getAllOrders() , HttpStatus.OK ) ;
+        List<BurgerOrder> allBurgerOrders = burgerOrderService.getAllOrders();
+
+        if(allBurgerOrders.size() == 0) {
+            return  new ResponseEntity<>( allBurgerOrders, HttpStatus.NOT_FOUND) ;
+        }
+
+        return  new ResponseEntity<>( allBurgerOrders , HttpStatus.OK ) ;
     }
 
     @PostMapping
-    public ResponseEntity<BurgerOrder> addBurgerOrder( @RequestParam Long id , @RequestParam Integer quantity ) {
+    public ResponseEntity<BurgerOrder> addBurgerOrder( @RequestParam Long id ,
+                                                       @RequestParam Integer quantity ) {
+        if(quantity <= 0) {
+            return  new ResponseEntity<>( null, HttpStatus.BAD_REQUEST) ;
+        }
+
         return new ResponseEntity<>(burgerOrderService.addBurgerOrder( id, quantity) , HttpStatus.OK);
     }
 

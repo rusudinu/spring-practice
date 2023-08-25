@@ -18,9 +18,17 @@ public class BurgerController {
 
     private final BurgerService burgerService;
 
+    public boolean isBurgerInValid(Burger burger) {
+        return burger.getDescription() == null || burger.getPrice() == null;
+    }
+
     @PostMapping
     public ResponseEntity<Burger> addBurger(@RequestBody Burger burger)
     {
+        if(isBurgerInValid(burger)) {
+            return new ResponseEntity<>( null , HttpStatus.BAD_REQUEST ) ;
+        }
+
         return new ResponseEntity<>( burgerService.addBurger( burger ) , HttpStatus.CREATED ) ;
     }
 
@@ -28,6 +36,10 @@ public class BurgerController {
     @PutMapping
     public ResponseEntity<Burger> updateBurger( @RequestBody Burger burger)
     {
+        if(isBurgerInValid(burger)) {
+            return new ResponseEntity<>( null , HttpStatus.BAD_REQUEST ) ;
+        }
+
         return  new ResponseEntity<>( burgerService.updateBurger( burger) , HttpStatus.CREATED) ;
     }
 
@@ -40,13 +52,25 @@ public class BurgerController {
     @GetMapping("{id}")
     public ResponseEntity<Burger> getBurger ( @PathVariable Long id)
     {
-        return  new ResponseEntity<>( burgerService.getBurger( id ) , HttpStatus.OK) ;
+        Burger burgerFound = burgerService.getBurger( id );
+
+        if(burgerFound == null) {
+            return new ResponseEntity<>( null , HttpStatus.NOT_FOUND ) ;
+        }
+
+        return  new ResponseEntity<>( burgerFound , HttpStatus.OK) ;
     }
 
     @GetMapping
     public ResponseEntity < List<Burger> >  getAllBurgers()
     {
-        return  new ResponseEntity<>( burgerService.getAllBurgers(), HttpStatus.OK) ;
+        List<Burger> allBurgers = burgerService.getAllBurgers();
+
+        if(allBurgers.size() == 0) {
+            return  new ResponseEntity<>( allBurgers, HttpStatus.NOT_FOUND) ;
+        }
+
+        return  new ResponseEntity<>( allBurgers, HttpStatus.OK) ;
     }
 
 

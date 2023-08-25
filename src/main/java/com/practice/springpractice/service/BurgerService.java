@@ -37,7 +37,7 @@ public class BurgerService {
     public Burger getBurger(Long id) {
         log.info("Getting burger with id " + id);
 
-        return burgerRepository.findById( id ).get();
+        return burgerRepository.findById( id ).orElse(null);
     }
 
     public List<Burger> getAllBurgers() {
