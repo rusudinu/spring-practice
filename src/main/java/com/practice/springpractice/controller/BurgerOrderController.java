@@ -33,7 +33,7 @@ public class BurgerOrderController {
 
     @PostMapping
     public ResponseEntity<BurgerOrder> addBurgerOrder( @RequestParam Long id ,
-                                                       @RequestParam Integer quantity ) {
+                                                        @RequestParam Integer quantity ) {
         if(quantity <= 0) {
             return  new ResponseEntity<>( null, HttpStatus.BAD_REQUEST) ;
         }

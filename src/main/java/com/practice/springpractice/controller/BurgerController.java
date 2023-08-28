@@ -76,13 +76,13 @@ public class BurgerController {
 
     @GetMapping("/paginated")
     public Page<Burger> getAllBurgersPaginated(@RequestParam(required = false, defaultValue = "0") Integer pageNo,
-                                               @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+                                                @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         return burgerService.getAllBurgersPaginated(pageNo, pageSize);
     }
 
     @GetMapping("/paginated/sorted")
     public Page<Burger> getAllBurgersPaginatedAndSorted(@RequestParam(required = false, defaultValue = "0") Integer pageNo,
-                                               @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+                                                @RequestParam(required = false, defaultValue = "10") Integer pageSize,
                                                 @RequestParam(required = false, defaultValue = "price") String criteria) {
         return burgerService.getAllBurgersPaginatedAndSorted(pageNo, pageSize, criteria);
     }
